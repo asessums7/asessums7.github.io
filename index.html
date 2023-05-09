@@ -16,8 +16,8 @@
 		<!-- Site Title -->
 		<title>Visit Diber</title>
         <link rel="icon" href="/img/albania.jpg">
-        <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
-        <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css' rel='stylesheet' />
     
     </head>
 
@@ -68,13 +68,13 @@
 								        Stays
 								      </a>
 								      <div class="dropdown-menu">
-								        <a class="dropdown-item" href="generic.html">Peshkopi</a>
-								        <a class="dropdown-item" href="elements.html">Radomire</a>
-                                        <a class="dropdown-item" href="elements.html">Burrel</a>
-                                        <a class="dropdown-item" href="elements.html">Rabdisht</a>
-                                        <a class="dropdown-item" href="elements.html">Maqellare</a>
-                                        <a class="dropdown-item" href="elements.html">Lura</a>
-                                        <a class="dropdown-item" href="elements.html">Klos</a> 
+								        <a class="dropdown-item" href="#">Peshkopi</a>
+								        <a class="dropdown-item" href="#">Radomire</a>
+                                        <a class="dropdown-item" href="#">Burrel</a>
+                                        <a class="dropdown-item" href="#">Rabdisht</a>
+                                        <a class="dropdown-item" href="#">Maqellare</a>
+                                        <a class="dropdown-item" href="#">Lura</a>
+                                        <a class="dropdown-item" href="#">Klos</a> 
 								      </div>
 								    <!-- Dropdown -->
 								    <li class="dropdown">
@@ -191,6 +191,45 @@
 			</section>
 			<!-- End about Area -->
 			
+           <!-- Start Map -->
+            <section class="project-area section-gap" id="project">
+                <div class="container">
+                    <div class="row d-flex justify-content-center">
+                        <div class="menu-content pb-30 col-lg-8">
+                            <div class="title text-center">
+                                <h1 class="mb-10">Interactive Map of Diber</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> labore  et dolore magna aliqua.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="map" style="width: 100%; height: 400px;"></div>
+                <script>
+                    mapboxgl.accessToken = 'pk.eyJ1IjoidmlzaXRkaWJlciIsImEiOiJjbGhna3Z0bzUwNjY5M2xvMmttM2pjNzBkIn0.FO5w2eo_ldRAb5fUVYGwIw';
+
+                    var map = new mapboxgl.Map({
+                        container: 'map',
+                        style: 'mapbox://styles/mapbox/streets-v11',
+                        center: [20.2356, 41.5888], // Example coordinates
+                        zoom: 5
+                });
+                map.on('load', function() {
+                    map.addLayer({
+                    id: 'boundary',
+                    type: 'line',
+                    source: {
+                        type: 'geojson',
+                        data: 'BOUNDARY_DATA_URL_HERE'
+                },
+                paint: {
+                        'line-color': 'red',
+                        'line-width': 2
+                        }
+                    });
+                });
+            </script>
+            </section>
+            <!-- End Map -->
 			
 			<!-- Start project Area -->
 			<section class="project-area section-gap" id="project">
@@ -245,22 +284,6 @@
 				</div>	
 			</section>
 			<!-- End project Area -->
-            
-            
-            <!-- Start Map -->
-            </section>
-                <div id="map" style="width: 100%; height: 400px;"></div>
-                <script>
-                    mapboxgl.accessToken = 'pk.eyJ1IjoidmlzaXRkaWJlciIsImEiOiJjbGhna3Z0bzUwNjY5M2xvMmttM2pjNzBkIn0.FO5w2eo_ldRAb5fUVYGwIw';
-
-                    var map = new mapboxgl.Map({
-                    container: 'map',
-                    style: 'mapbox://styles/mapbox/streets-v11',
-                    center: [20.000, 41.627], // Example coordinates
-                    zoom: 10
-                    });
-                </script>
-            </section>
 
 			<!-- Start feature Area -->
 			<section class="feature-area section-gap" id="secvice">
