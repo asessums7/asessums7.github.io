@@ -16,6 +16,10 @@
 		<!-- Site Title -->
 		<title>Visit Diber</title>
         <link rel="icon" href="/img/albania.jpg">
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.css' rel='stylesheet' />
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.4.1/mapbox-gl.js'></script>
+    
+    </head>
 
 		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
 			<!--
@@ -54,8 +58,8 @@
                                       <div class="dropdown-menu">
                                         <a class="dropdown-item" href="#">Thermal Springs</a>
                                         <a class="dropdown-item" href="#">Black Drin River Rafting</a>
-                                        <a class="dropdown-item" href="#">Mount Korabi</a>
-                                        <a class="dropdown-item" href="#">Lura National Park</a>  
+                                        <a class="dropdown-item" href="#">Crafting in Bulqize</a>
+                                        <a class="dropdown-item" href="#">Pottery in Peshkopi</a>  
                                         <a class="dropdown-item" href="#">Paragliding</a>
                                       </div>
                                     <!-- Dropdown -->
@@ -67,8 +71,10 @@
 								        <a class="dropdown-item" href="generic.html">Peshkopi</a>
 								        <a class="dropdown-item" href="elements.html">Radomire</a>
                                         <a class="dropdown-item" href="elements.html">Burrel</a>
+                                        <a class="dropdown-item" href="elements.html">Rabdisht</a>
                                         <a class="dropdown-item" href="elements.html">Maqellare</a>
-                                        <a class="dropdown-item" href="elements.html">Lura</a>  
+                                        <a class="dropdown-item" href="elements.html">Lura</a>
+                                        <a class="dropdown-item" href="elements.html">Klos</a> 
 								      </div>
 								    <!-- Dropdown -->
 								    <li class="dropdown">
@@ -76,9 +82,9 @@
 								        Trails And Parks
 								      </a>
                                       <div class="dropdown-menu">
-                                        <a class="dropdown-item" href="#">Trail 1</a>
-                                        <a class="dropdown-item" href="#">Trail 2</a>
-                                        <a class="dropdown-item" href="#">Trail 3</a>
+                                        <a class="dropdown-item" href="#">Mount Korabi</a>
+                                        <a class="dropdown-item" href="#">Lakes of Luras National Park</a>
+                                        <a class="dropdown-item" href="#"></a>
                                       </div>
                                     </li>
 									<li><a href="#gallery">Gallery</a></li>
@@ -164,13 +170,13 @@
 								Diber Special<br>
 								</h2>
 								<p>
-									If you're looking for an authentic and unforgettable travel experience, look no further than the stunning region of Diber. Located in the eastern part of Albania, Diber is a hidden gem that offers a unique blend of cultural and culinary delights.									
+									Diber is the undiscovered, hidden gem of Northern Albania. Located 1.5 hours by car from Tirna, in the mountaineous eastern part of Albania, Diber is that offers a pure blend of cultural and culinary delights.							
 								</p>
 								<br>
 								<p>
-									When you visit Diber, you'll have the opportunity to immerse yourself in the local culture and traditions. Explore the charming villages and towns, where you'll find ancient churches, traditional markets, and friendly locals who are eager to share their stories and way of life. 
+									When you visit Diber, you'll have the opportunity to immerse yourself in the local culture and traditions. Explore the charming villages and towns, where you'll find ancient churches and mosques, traditional markets, and friendly locals who are eager to share their stories and way of life. 
                                     
-                                    One of the highlights of a trip to Diber is the incredible culinary experiences. The region is known for its delicious and authentic Albanian cuisine, which features fresh and locally sourced meat and vegetables. From savory meat dishes to mouthwatering byrek, there's something to satisfy every taste bud.
+                                    One of the highlights of a trip to Diber is the incredible culinary experiences. The region is known for its fresh and authentic Albanian cuisine, which features locally sourced meat and vegetables. From savory meat dishes to mouthwatering byrek, there's something to satisfy every taste bud.
 								</p>
 								<br>
 								<p>
@@ -192,7 +198,7 @@
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-30 col-lg-8">
 							<div class="title text-center">
-								<h1 class="mb-10">Latest Project on the go</h1>
+								<h1 class="mb-10">Interactive Map of Diber</h1>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut <br> labore  et dolore magna aliqua.</p>
 							</div>
 						</div>
@@ -239,7 +245,22 @@
 				</div>	
 			</section>
 			<!-- End project Area -->
+            
+            
+            <!-- Start Map -->
+            </section>
+                <div id="map" style="width: 100%; height: 400px;"></div>
+                <script>
+                    mapboxgl.accessToken = 'pk.eyJ1IjoidmlzaXRkaWJlciIsImEiOiJjbGhna3Z0bzUwNjY5M2xvMmttM2pjNzBkIn0.FO5w2eo_ldRAb5fUVYGwIw';
 
+                    var map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v11',
+                    center: [20.000, 41.627], // Example coordinates
+                    zoom: 10
+                    });
+                </script>
+            </section>
 
 			<!-- Start feature Area -->
 			<section class="feature-area section-gap" id="secvice">
@@ -251,7 +272,7 @@
 								<p>Who are in extremely love with eco friendly system.</p>
 							</div>
 						</div>
-					</div>						
+					</div>	
 					<div class="row">
 						<div class="col-lg-4 col-md-6 ">
 							<div class="single-feature mb-30">
