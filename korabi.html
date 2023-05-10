@@ -1,159 +1,53 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Animate the camera around a point with 3D terrain</title>
-    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
-    <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
-    <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
-    <style>
-        body { margin: 5; padding: 2; }
-        #map { position: absolute; top: 0; bottom: 0; width: 100%; width: 400px; height: 422px; }
-    </style>
-</head>
-<body>
-    <div id="map"></div>
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/elements/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="CodePixar">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Adventure</title>
 
-<script>
-	mapboxgl.accessToken = 'pk.eyJ1IjoidmlzaXRkaWJlciIsImEiOiJjbGhna3U5bmswMnMzM2ZwcnU1N3RoeDdjIn0._OkdJZRFVnDZKZy4PVd8Jw';
-    const map = new mapboxgl.Map({
-        container: 'map',
-        zoom: 11.53,
-        center: [20.777228, 41.789552],
-        pitch: 76,
-        bearing: -177.2,
-        // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-        style: 'mapbox://styles/mapbox/satellite-v9',
-        interactive: false
-    });
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="css/linearicons.css">
+			<link rel="stylesheet" href="css/owl.carousel.css">
+			<link rel="stylesheet" href="css/font-awesome.min.css">
+			<link rel="stylesheet" href="css/nice-select.css">			
+			<link rel="stylesheet" href="css/magnific-popup.css">
+			<link rel="stylesheet" href="css/bootstrap.css">
+			<link rel="stylesheet" href="css/main.css">
+		</head>
+		<body>
+			<!-- Start banner Area -->
+			<section class="generic-banner relative">
+			<!-- Start Header Area -->
+				<header class="default-header">
+					<nav class="navbar navbar-expand-lg  navbar-light">
+						<div class="container">
+							  <a class="navbar-brand" href="index.html">
+							  	<img src="img/logo.png" alt="">
+							  </a>
+							  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+							    <span class="text-white lnr lnr-menu"></span>
+							  </button>
 
-    map.on('style.load', () => {
-        map.setFog({}); // Set the default atmosphere style
-
-        // Add terrain
-        map.addSource('mapbox-dem', {
-            'type': 'raster-dem',
-            'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
-            'tileSize': 512,
-            'maxzoom': 14
-        });
-        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
-    });
-
-    function updateCameraPosition(position, altitude, target) {
-        const camera = map.getFreeCameraOptions();
-
-        camera.position = mapboxgl.MercatorCoordinate.fromLngLat(
-            position,
-            altitude
-        );
-        camera.lookAtPoint(target);
-
-        map.setFreeCameraOptions(camera);
-    }
-
-    let animationIndex = 0;
-    let animationTime = 0.0;
-
-    // wait for the terrain to load before starting animations
-    map.once('idle', () => {
-        // linearly interpolate between two altitudes/positions based on time
-        const lerp = (a, b, t) => {
-            if (Array.isArray(a) && Array.isArray(b)) {
-                const result = [];
-                for (let i = 0; i < Math.min(a.length, b.length); i++)
-                    result[i] = a[i] * (1.0 - t) + b[i] * t;
-                return result;
-            } else {
-                return a * (1.0 - t) + b * t;
-            }
-        };
-
-        const animations = [
-            {
-                duration: 20000.0,
-                animate: (phase) => {
-                    const start = [138.73375, 35.41914];
-                    const end = [138.72649, 35.33974];
-                    const alt = [7000.0, 6000.0];
-
-                    // interpolate camera position while keeping focus on a target lat/lng
-                    const position = lerp(start, end, phase);
-                    const altitude = lerp(alt[0], alt[1], phase);
-                    const target = [138.73036, 35.36197];
-
-                    updateCameraPosition(position, altitude, target);
-                }
-            },
-            {
-                duration: 15000.0,
-                animate: (phase) => {
-                    const start = [20.5200, 41.7333];
-                    const end = [20.5022, 41.7836];
-                    const alt = [1000.0, 2000.0];
-                    const target1 = [20.5150, 41.7583];
-                    const target2 = [20.5150, 41.7583];
-
-                    // interpolate both the camera position and target
-                    const position = lerp(start, end, phase);
-                    const altitude = lerp(alt[0], alt[1], phase);
-                    const target = lerp(target1, target2, phase);
-
-                    updateCameraPosition(position, altitude, target);
-                }
-            },
-            {
-                duration: 15000.0,
-                animate: (phase) => {
-                    // create easing function for the animation
-                    const easeInOutQuad = (t) => {
-                        return t < 0.5
-                            ? 2.0 * t * t
-                            : (4.0 - 2.0 * t) * t - 1.0;
-                    };
-                    const start = [20.5200, 41.7333];
-                    const end = [20.5022, 41.7836];
-                    const alt = [1000.0, 2000.0];
-                    const target1 = [20.5150, 41.7583];
-                    const target2 = [20.5150, 41.7583];
-
-                    // interpolate both the camera position and target
-                    const position = lerp(start, end, easeInOutQuad(phase));
-                    const altitude = lerp(alt[0], alt[1], phase);
-                    const target = lerp(target1, target2, phase);
-
-                    updateCameraPosition(position, altitude, target);
-                }
-            }
-        ];
-
-        let lastTime = 0.0;
-        function frame(time) {
-            animationIndex %= animations.length;
-            const current = animations[animationIndex];
-
-            if (animationTime < current.duration) {
-                // Normalize the duration between 0 and 1 to interpolate the animation
-                const phase = animationTime / current.duration;
-                current.animate(phase);
-            }
-
-            // Elasped time since last frame, in milliseconds
-            const elapsed = time - lastTime;
-            animationTime += elapsed;
-            lastTime = time;
-
-            if (animationTime > current.duration) {
-                animationIndex++;
-                animationTime = 0.0;
-            }
-
-            window.requestAnimationFrame(frame);
-        }
-
-        window.requestAnimationFrame(frame);
-    });
-</script>
-
-</body>
-</html>
+							  <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarSupportedContent">
+							    <ul class="navbar-nav">
+									<li><a href="index.html#home">Home</a></li>
+							    </ul>
+							  </div>						
+						</div>
+					</nav>
+				</header>
+                <!-- End Header Area -->
